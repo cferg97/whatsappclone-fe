@@ -57,10 +57,14 @@ const UserProfile = () => {
           <div id="profile-rightBox d-flex flex-column">
             <div id="profile-userImagePanel">
               <div id="profile-userImageBox">
+                <div id="profile-photoCover">
+                  <SlPencil size={36} />
+                </div>
                 <img
                   id="profile-userImage"
                   src="https://cdn.landesa.org/wp-content/uploads/default-user-image.png"
                   alt="user"
+                  className="image-fluid"
                 />
               </div>
             </div>
