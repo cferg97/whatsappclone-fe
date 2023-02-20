@@ -1,38 +1,42 @@
+/*profile stuff*/
 .App {
-  text-align: center;
+  max-height: 100dvh;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#profile-leftSideBar {
+  background-color: lightgrey;
+  padding: 1em;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+.profile-sidebarItem {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+.profile-sidebarItem:hover {
+  background-color: gray;
 }
 
-.App-link {
-  color: #61dafb;
+.profile-Option {
+  margin-left: 0.5em;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#profile-userImagePanel {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+#profile-userImageBox {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#profile-userImage {
+  width: 200px;
+  aspect-ratio: 1/1;
 }
