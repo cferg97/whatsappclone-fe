@@ -64,23 +64,27 @@ const UserProfile = () => {
                 />
               </div>
             </div>
-            <div>
+            <div className="profile-inputBox">
               <input
                 type="text"
                 name="Users Name"
                 placeholder="userName will go here"
               />
-              <SlPencil />
+              <div className="profile-svgBox">
+                <SlPencil />
+              </div>
             </div>
             <div className="mt-3 d-flex flex-column">
               <label for="about">About</label>
-              <div>
+              <div className="profile-inputBox">
                 <input
                   type="text"
                   name="about"
                   placeholder="Hey there! I am using WhatsApp."
                 />
-                <SlPencil />
+                <div className="profile-svgBox">
+                  <SlPencil />
+                </div>
               </div>
             </div>
             <div className="mt-3 d-flex flex-column">

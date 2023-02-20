@@ -40,3 +40,30 @@
   width: 200px;
   aspect-ratio: 1/1;
 }
+.profile-inputBox {
+  display: flex;
+  align-items: center;
+}
+.profile-svgBox {
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.profile-svgBox:hover {
+  background-color: lightgray;
+}
+
+input {
+  border: none;
+  padding: 0.5em 0 0.5em 0;
+  width: 30%;
+}
+input:focus {
+  border-top: none;
+  outline: none;
+  border-bottom: green 1pt solid;
+  box-shadow: gray 0 0 10px;
+  border-radius: 5px;
+}
