@@ -82,7 +82,7 @@ body {
 #profile-leftSideBar {
   background-color: rgb(240, 239, 239);
   padding: 1em;
-  height: 100vh;
+  height: 45rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
