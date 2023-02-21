@@ -4,7 +4,7 @@ import "./customNav.css";
 function CustomNav() {
   return (
     <Navbar>
-      <Container className="justify-content-center">
+      <Container className="justify-content-center my-5">
         <Row>
           <Col className="login-navText">
             <svg
