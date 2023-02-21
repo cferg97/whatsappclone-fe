@@ -28,9 +28,12 @@ const LoginForm = () => {
                 OR QUICK ACCESS
               </p>
             </div>
-            <Container className="d-flex justify-content-center m-1">
-              <Row className="login-40p">
-                <Col className="m-0 p-0">
+            <Container fluid className="d-flex justify-content-center m-1">
+              <Row
+                style={{ width: "100%", justifyContent: 'space-evenly'}}
+                className="login-40p"
+              >
+                <Col style={{ maxWidth: "fit-content" }} className="m-0 p-0">
                   <a href="http://localhost:3001/users/facebookLogin">
                     <Button className="login-quick-button">
                       <svg
@@ -46,7 +49,7 @@ const LoginForm = () => {
                     </Button>
                   </a>
                 </Col>
-                <Col className="m-0 p-0">
+                <Col className="m-0 p-0" style={{ maxWidth: "fit-content" }}>
                   <a href="http://localhost:3001/users/googleLogin">
                     <Button className="login-quick-button">
                       <svg
