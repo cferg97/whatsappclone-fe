@@ -28,8 +28,8 @@ const LoginForm = () => {
                 OR QUICK ACCESS
               </p>
             </div>
-            <Container className="m-1">
-              <Row className="d-flex justify-content-center login-40p">
+            <Container className="d-flex justify-content-center m-1">
+              <Row className="login-40p">
                 <Col className="m-0 p-0">
                   <a href="http://localhost:3001/users/facebookLogin">
                     <Button className="login-quick-button">
