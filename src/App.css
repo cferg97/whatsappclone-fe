@@ -13,6 +13,9 @@
   justify-content: space-between;
   font-size: 18px;
   border-right: lightgray 1pt solid;
+  text-align: center;
+  background-color: #00a884;
+  height: 25vh;
 }
 .profile-sidebarItem {
   margin-top: 0.5em;
@@ -91,4 +94,13 @@ input:focus {
   border-bottom: green 1pt solid;
   box-shadow: gray 0 0 10px;
   border-radius: 5px;
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+
 }
