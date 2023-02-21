@@ -1,14 +1,99 @@
+/*profile stuff*/
 .App {
+  max-height: 100dvh;
+  overflow: hidden;
+}
+
+#profile-leftSideBar {
+  background-color: rgb(240, 239, 239);
+  padding: 1em;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 18px;
+  border-right: lightgray 1pt solid;
   text-align: center;
   background-color: #00a884;
   height: 25vh;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.profile-sidebarItem {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  align-items: center;
+  border-radius: 5px;
+  padding: 0.5em;
 }
+.profile-sidebarItem:hover {
+  background-color: rgb(224, 224, 224);
+}
+.selected {
+  border-left: green 2px solid;
+  background-color: rgb(224, 224, 224);
+}
+
+.profile-Option {
+  margin-left: 0.5em;
+}
+#profile-userImagePanel {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+#profile-userImageBox {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+#profile-photoCover {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.726);
+  color: white;
+  opacity: 0;
+}
+#profile-photoCover:hover {
+  opacity: 100;
+}
+#profile-userImage {
+  width: 200px;
+  aspect-ratio: 1/1;
+}
+.profile-inputBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.profile-inputBox p {
+  width: 30%;
+}
+.profile-svgBox {
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.profile-svgBox:hover {
+  background-color: rgb(224, 224, 224);
+}
+
+input {
+  border: none;
+  padding: 0.5em 0 0.5em 0;
+  width: 40%;
+}
+input:focus {
+  border-top: none;
+  outline: none;
+  border-bottom: green 1pt solid;
+  box-shadow: gray 0 0 10px;
+  border-radius: 5px;
 
 @keyframes App-logo-spin {
   from {
@@ -17,4 +102,5 @@
   to {
     transform: rotate(360deg);
   }
+
 }
