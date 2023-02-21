@@ -7,46 +7,109 @@ import { CiKeyboard } from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { SlPencil } from "react-icons/sl";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { useState } from "react";
+import ClickAwayListener from "@mui/base/ClickAwayListener";
+import NameInput from "./NameInput";
+import AboutInput from "./AboutInput";
 
 const UserProfile = () => {
+  const [isSelected, setSelected] = useState("Profile");
+  const [edit, setEdit] = useState(null);
+
   return (
     <div>
       <Row>
         <Col lg={2}>
           <div id="profile-leftSideBar">
             <div id="profile-top">
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "General"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("General")}
+              >
                 <MdComputer />
                 <div className="profile-Option">General</div>
               </div>
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "Account"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("Account")}
+              >
                 <VscKey />
                 <div className="profile-Option">Account</div>
               </div>
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "Chats"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("Chats")}
+              >
                 <HiOutlineChatBubbleLeftRight />
                 <div className="profile-Option">Chats</div>
               </div>
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "Notifications"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("Notifications")}
+              >
                 <IoNotificationsOutline />
                 <div className="profile-Option">Notifications</div>
               </div>
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "Storage"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("Storage")}
+              >
                 <CgDrive />
                 <div className="profile-Option">Storage</div>
               </div>
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "Shortcuts"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("Shortcuts")}
+              >
                 <CiKeyboard />
                 <div className="profile-Option">Shortcuts</div>
               </div>
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "Help"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("Help")}
+              >
                 <IoIosInformationCircleOutline />
                 <div className="profile-Option">Help</div>
               </div>
             </div>
             <div className="profile-bottom">
-              <div className="profile-sidebarItem d-flex">
+              <div
+                className={
+                  isSelected === "Profile"
+                    ? "selected d-flex profile-sidebarItem"
+                    : "profile-sidebarItem d-flex"
+                }
+                onClick={() => setSelected("Profile")}
+              >
                 <FaRegUser />
                 <div className="profile-Option">Profile</div>
               </div>
@@ -69,26 +132,39 @@ const UserProfile = () => {
               </div>
             </div>
             <div className="profile-inputBox">
-              <input
-                type="text"
-                name="Users Name"
-                placeholder="userName will go here"
-              />
-              <div className="profile-svgBox">
-                <SlPencil />
-              </div>
+              {edit === null ? (
+                <>
+                  <p className="my-0">User Name Here</p>
+                  <div
+                    className="profile-svgBox"
+                    onClick={() => setEdit("nameChange")}
+                  >
+                    <SlPencil />
+                  </div>
+                </>
+              ) : (
+                <ClickAwayListener onClickAway={() => setEdit(null)}>
+                  <>
+                    <NameInput />
+                  </>
+                </ClickAwayListener>
+              )}
             </div>
             <div className="mt-3 d-flex flex-column">
               <label for="about">About</label>
               <div className="profile-inputBox">
-                <input
-                  type="text"
-                  name="about"
-                  placeholder="Hey there! I am using WhatsApp."
-                />
-                <div className="profile-svgBox">
-                  <SlPencil />
-                </div>
+                {edit !== "aboutChange" && (
+                  <>
+                    <p>I'm using WhatsApp...or am I?</p>
+                    <div
+                      className="profile-svgBox"
+                      onClick={() => setEdit("aboutChange")}
+                    >
+                      <SlPencil />
+                    </div>
+                  </>
+                )}
+                {edit === "aboutChange" && <AboutInput />}
               </div>
             </div>
             <div className="mt-3 d-flex flex-column">
