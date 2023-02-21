@@ -183,15 +183,11 @@ input:focus {
   border-radius: 5px;
 }
 
-.user-profile-pic{
+.user-profile-pic {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
-.user-profile-pic:hover{
+.user-profile-pic:hover {}
 
-}
-
-.user-modal{
-  
-}
+.user-modal {}

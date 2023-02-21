@@ -11,6 +11,12 @@ html{
 
 .login-80p {
   width: 100%;
+  background-color: #04866a;
+  border: none;
+}
+
+.login-80p:hover {
+  background-color: #05614d;
 }
 
 .login-40p {

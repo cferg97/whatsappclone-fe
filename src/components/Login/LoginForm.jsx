@@ -6,6 +6,7 @@ const LoginForm = () => {
     <Container className="p-5 mt-5">
       <Row className="d-flex justify-content-center">
         <Col md="7" className="mt-5">
+          <h2 className="text-center">Sign In</h2>
           <Form>
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Email</Form.Label>
@@ -22,6 +23,9 @@ const LoginForm = () => {
               <a href="http://localhost:3001/users/">
                 <p className="text-center mx-3 mb-0">Forgot password?</p>
               </a>
+              <a href="http://localhost:3000/register">
+                <p>Need an account?</p>
+              </a>
             </div>
             <div className="d-flex justify-content-center my-4">
               <p className="text-center text-muted mx-3 mb-0">
@@ -30,7 +34,7 @@ const LoginForm = () => {
             </div>
             <Container fluid className="d-flex justify-content-center m-1">
               <Row
-                style={{ width: "100%", justifyContent: 'space-evenly'}}
+                style={{ width: "100%", justifyContent: "space-evenly" }}
                 className="login-40p"
               >
                 <Col style={{ maxWidth: "fit-content" }} className="m-0 p-0">

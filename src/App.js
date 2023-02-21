@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UserProfile from "./components/userprofile/UserProfile";
 import CustomNav from "./components/Nav/CustomNav.jsx";
 import LoginForm from "./components/Login/LoginForm.jsx";
+import Register from "./components/Login/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<LoginForm />} />
+          <Route path="/register" element={<Register/>} />
           <Route path="/dashboard" element={<ChatArea/>} />
         </Routes>
       </Router>
