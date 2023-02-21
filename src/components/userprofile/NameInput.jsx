@@ -1,5 +1,3 @@
-import ClickAwayListener from "@mui/base/ClickAwayListener";
-
 const NameInput = () => {
   return (
     <input

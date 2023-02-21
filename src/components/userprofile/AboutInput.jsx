@@ -1,5 +1,3 @@
-import { SlPencil } from "react-icons/sl";
-
 const AboutInput = () => {
   return (
     <input
