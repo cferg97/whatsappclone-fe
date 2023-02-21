@@ -1,0 +1,24 @@
+.login-rounded {
+  border-radius: 25px;
+}
+
+.login-80p {
+  width: 80%;
+}
+
+.login-40p {
+  width: 40%;
+}
+
+.login-quick-button {
+  background-color: #00a884;
+  border: none;
+  border-radius: 15px;
+  margin: 0px;
+}
+
+.login-quick-button:hover {
+  background-color: #04866a;
+  border: none;
+  border-radius: 15px;
+}
