@@ -5,9 +5,14 @@ import { BiMessageAdd, BiMessageDetail } from "react-icons/bi";
 import { RiContactsLine } from "react-icons/ri";
 import { useState } from "react";
 import NewChatModal from "./NewChatModal";
+import TextArea from "./TextArea";
+import ChatBubble from "./ChatBubbleOwn";
 
-const ChatArea = () => {
+const ChatArea = (props) => {
   const [show, setShow] = useState(false);
+  const [selectedChat, setSelectedChat] = useState("");
+
+  console.log(selectedChat);
 
   const testContactsList = [
     {
@@ -23,6 +28,8 @@ const ChatArea = () => {
       id: 2,
     },
   ];
+
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
@@ -75,12 +82,14 @@ const ChatArea = () => {
                 maxHeight: "70%",
               }}
             >
-              <Contacts />
-              <Contacts />
-              <Contacts />
-              <Contacts />
-              <Contacts />
-              <Contacts />
+              {testContactsList.map((contact) => (
+                <Contacts
+                  user={contact}
+                  onClick={() => {
+                    setSelectedChat(contact.name);
+                  }}
+                />
+              ))}
             </Container>
             <Container
               className="m-0 p-0"
@@ -123,7 +132,20 @@ const ChatArea = () => {
           style={{ position: "absolute", right: 0, width: "75%" }}
           className="chat-area-main-con p-0 m-0"
         >
-          <ChatHeader />
+          <ChatHeader
+            selectedChat={selectedChat}
+            user={props.selectedChat ? props.selectedChat : ""}
+          />
+          <Container style={{width: '100%', height: '90%'}} fluid className="chat-area-chat-display">
+            <Row style={{height: '90%', width: '100%'}}>
+              <Col md={12} style={{height: '90%'}}>
+              <ChatBubble text="Hello!"/>
+              <ChatBubble text="Hello!"/>
+              </Col>
+
+            </Row>
+          </Container>
+          <TextArea/>
         </Container>
       </Container>
 

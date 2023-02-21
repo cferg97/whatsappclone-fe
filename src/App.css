@@ -26,3 +26,48 @@ body{
 .chat-area-profile-picture{
   box-shadow: 1px 2px 5px rgba(0,0,0,0.4);
 }
+
+.chat-area-card{
+  cursor: pointer;
+}
+
+.chat-area-text-box{
+  width: 100%;
+  height: 5rem;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  bottom: 0;
+}
+
+.chat-area-btn-con{
+  display: flex;
+  position: absolute;
+}
+
+.chat-area-send-btn{
+  height: 2rem;
+  width: 2rem;
+}
+
+.chat-area-bubble{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  min-height: 3rem;
+  height: fit-content;
+  max-width: 14rem;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 0.75rem;
+  background-color: rgb(255, 255, 255);
+
+}
+.chat-area-bubble p {
+  margin: 0;
+}
+
+.chat-area-chat-display{
+  max-height: 90%;
+  overflow-y: scroll;
+}
