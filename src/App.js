@@ -22,6 +22,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<LoginForm />} />
+          <Route path="/dashboard" element={<ChatArea/>} />
         </Routes>
       </Router>
     </>

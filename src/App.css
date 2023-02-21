@@ -33,7 +33,7 @@ body {
 }
 
 .App {
-  max-height: 100dvh;
+  max-height: 100vh;
   overflow: hidden;
 }
 
@@ -82,15 +82,14 @@ body {
 #profile-leftSideBar {
   background-color: rgb(240, 239, 239);
   padding: 1em;
-  height: 100dvh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-size: 18px;
   border-right: lightgray 1pt solid;
   text-align: center;
-  background-color: #00a884;
-  height: 25vh;
+  /* height: 25vh; */
 }
 
 .profile-sidebarItem {
@@ -182,4 +181,17 @@ input:focus {
   border-bottom: green 1pt solid;
   box-shadow: gray 0 0 10px;
   border-radius: 5px;
+}
+
+.user-profile-pic{
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.user-profile-pic:hover{
+
+}
+
+.user-modal{
+  
 }

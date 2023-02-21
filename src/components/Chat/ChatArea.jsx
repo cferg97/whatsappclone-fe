@@ -7,9 +7,11 @@ import { useState } from "react";
 import NewChatModal from "./NewChatModal";
 import TextArea from "./TextArea";
 import ChatBubble from "./ChatBubbleOwn";
+import UserModal from "../userprofile/UserModal";
 
 const ChatArea = (props) => {
   const [show, setShow] = useState(false);
+  const [showUser, setShowUser] = useState(false)
   const [selectedChat, setSelectedChat] = useState("");
 
   console.log(selectedChat);
@@ -29,9 +31,11 @@ const ChatArea = (props) => {
     },
   ];
 
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleUserClose = () => setShowUser(false)
+  const handleUserOpen = () => setShowUser(true)
   return (
     <>
       <Container
@@ -57,8 +61,23 @@ const ChatArea = (props) => {
           }}
         >
           <Container fluid>
-            <Row className="text-center mt-2">
-              <h3>Chats</h3>
+            <Row className="text-center mt-2 p-0 m-0">
+              <Container style={{display: 'flex', marginBottom: '1rem'}}>
+                <img
+                  className="img-fluid user-profile-pic"
+                  onClick={() => setShowUser(true)}
+                  style={{
+                    height: "50px",
+                    width: "auto",
+                    borderRadius: "100%",
+                    position: 'absolute',
+                    left: 20
+                  }}
+                  src="https://picsum.photos/100/100"
+                  alt=""
+                />
+                <h3 className="mx-auto mt-1">Chats</h3>
+              </Container>
             </Row>
             <Row>
               <input
@@ -136,16 +155,19 @@ const ChatArea = (props) => {
             selectedChat={selectedChat}
             user={props.selectedChat ? props.selectedChat : ""}
           />
-          <Container style={{width: '100%', height: '90%'}} fluid className="chat-area-chat-display">
-            <Row style={{height: '90%', width: '100%'}}>
-              <Col md={12} style={{height: '90%'}}>
-              <ChatBubble text="Hello!"/>
-              <ChatBubble text="Hello!"/>
+          <Container
+            style={{ width: "100%", height: "90%" }}
+            fluid
+            className="chat-area-chat-display"
+          >
+            <Row style={{ height: "90%", width: "100%" }}>
+              <Col md={12} style={{ height: "90%" }}>
+                <ChatBubble text="Hello!" />
+                <ChatBubble text="Hello!" />
               </Col>
-
             </Row>
           </Container>
-          <TextArea/>
+          <TextArea />
         </Container>
       </Container>
 
@@ -155,6 +177,7 @@ const ChatArea = (props) => {
         onHide={handleClose}
         handleClose={handleClose}
       />
+      <UserModal show={showUser} handleClose={handleUserClose}/>
     </>
   );
 };

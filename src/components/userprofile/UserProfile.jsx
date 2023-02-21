@@ -9,6 +9,7 @@ import { FaRegUser } from "react-icons/fa";
 import { SlPencil } from "react-icons/sl";
 import { Row, Col } from "react-bootstrap";
 import { useState } from "react";
+import { Container } from "react-bootstrap";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import NameInput from "./NameInput";
 import AboutInput from "./AboutInput";
@@ -18,9 +19,9 @@ const UserProfile = () => {
   const [edit, setEdit] = useState(null);
 
   return (
-    <div>
+    <Container fluid>
       <Row>
-        <Col lg={2}>
+        <Col lg={4} md={4}>
           <div id="profile-leftSideBar">
             <div id="profile-top">
               <div
@@ -116,7 +117,7 @@ const UserProfile = () => {
             </div>
           </div>
         </Col>
-        <Col lg={10}>
+        <Col lg={8}>
           <div id="profile-rightBox d-flex flex-column">
             <div id="profile-userImagePanel">
               <div id="profile-userImageBox">
@@ -174,7 +175,7 @@ const UserProfile = () => {
           </div>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 export default UserProfile;
