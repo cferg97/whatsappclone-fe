@@ -100,3 +100,26 @@ export const registerUserAction = (userForm) => {
     }
   };
 };
+
+export const uploadAvatarAction = (image) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch("http://localhost:3001/users/me/avatar", {
+        method: "POST",
+        body: image,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+      } else {
+        console.log("There was a problem submitting the image");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

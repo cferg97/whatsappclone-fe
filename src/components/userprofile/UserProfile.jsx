@@ -7,7 +7,7 @@ import { CiKeyboard } from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { SlPencil } from "react-icons/sl";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
@@ -15,7 +15,7 @@ import NameInput from "./NameInput";
 import AboutInput from "./AboutInput";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { changeProfileAction } from "../redux/actions";
+import { changeProfileAction, uploadAvatarAction } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
@@ -29,6 +29,7 @@ const UserProfile = () => {
   const [username, setUsername] = useState(currentUser.userName);
   const [about, setAbout] = useState(currentUser.about);
   const [phone, setPhone] = useState(currentUser.phone);
+  const [image, setImage] = useState(null);
 
   const detailsToEdit = {
     userName: username,
@@ -38,6 +39,13 @@ const UserProfile = () => {
 
   const onSubmitHandler = () => {
     dispatch(changeProfileAction(detailsToEdit));
+  };
+
+  const onImageUpload = () => {
+    const formData = new FormData();
+    formData.append("avatar", image);
+    setImage(null)
+    dispatch(uploadAvatarAction(formData));
   };
 
   const onLogOut = () => {
@@ -158,6 +166,14 @@ const UserProfile = () => {
                   className="image-fluid"
                 />
               </div>
+              <input
+                onChange={(e) => setImage(e.target.files[0])}
+                type="file"
+                id="myFile"
+                name="filename"
+              ></input>
+              <br />
+              <Button onClick={() => onImageUpload()}>Upload Avatar</Button>
             </div>
             <div className="profile-inputBox">
               {edit === null ? (
@@ -206,7 +222,11 @@ const UserProfile = () => {
             Submit Changes
           </Button>
           <br />
-          <Button variant="danger" onClick={() => onLogOut()} className="mt-3 ml-4">
+          <Button
+            variant="danger"
+            onClick={() => onLogOut()}
+            className="mt-3 ml-4"
+          >
             Log Out
           </Button>
         </Col>
