@@ -16,10 +16,11 @@ import AboutInput from "./AboutInput";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { changeProfileAction } from "../redux/actions";
-
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSelected, setSelected] = useState("Profile");
   const [edit, setEdit] = useState(null);
 
@@ -36,8 +37,13 @@ const UserProfile = () => {
   };
 
   const onSubmitHandler = () => {
-    dispatch(changeProfileAction(detailsToEdit))
-  }
+    dispatch(changeProfileAction(detailsToEdit));
+  };
+
+  const onLogOut = () => {
+    localStorage.removeItem("UserAccessToken");
+    navigate("/");
+  };
 
   return (
     <Container fluid>
@@ -196,7 +202,13 @@ const UserProfile = () => {
               <div>{phone}</div>
             </div>
           </div>
-          <Button className="mt-3" onClick={() => onSubmitHandler()}>Submit Changes</Button>
+          <Button className="mt-3" onClick={() => onSubmitHandler()}>
+            Submit Changes
+          </Button>
+          <br />
+          <Button variant="danger" onClick={() => onLogOut()} className="mt-3 ml-4">
+            Log Out
+          </Button>
         </Col>
       </Row>
     </Container>

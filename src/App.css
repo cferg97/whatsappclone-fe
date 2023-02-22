@@ -61,13 +61,12 @@ body {
   display: flex;
   min-height: 3rem;
   height: fit-content;
-  max-width: 14rem;
+  max-width: 60rem;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
   margin: 0.75rem;
   background-color: rgb(255, 255, 255);
-
 }
 
 .chat-area-bubble p {
