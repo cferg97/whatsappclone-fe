@@ -41,18 +41,17 @@ export const changeProfileAction = (userInfo) => {
         method: "PUT",
         body: JSON.stringify(userInfo),
         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        }
-      })
-      if(response.ok){
-        dispatch(fetchCurrentUser())
-      }
-      else{
-        console.log('There was an error submitting your profile')
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCurrentUser());
+      } else {
+        console.log("There was an error submitting your profile");
       }
     } catch (err) {
-        console.log(err)
+      console.log(err);
     }
   };
 };
@@ -74,6 +73,27 @@ export const logInAction = (userInfo) => {
         window.location.assign("http://localhost:3000/dashboard");
       } else {
         console.log("There was a problem logging into your account");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const registerUserAction = (userForm) => {
+  return async () => {
+    try {
+      let response = await fetch("http://localhost:3001/users/account", {
+        method: "POST",
+        body: JSON.stringify(userForm),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        window.location.assign("http://localhost:3000/");
+      } else {
+        console.log("There was an error submitting your request");
       }
     } catch (err) {
       console.log(err);
