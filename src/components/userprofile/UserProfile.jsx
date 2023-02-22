@@ -13,10 +13,14 @@ import { Container } from "react-bootstrap";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import NameInput from "./NameInput";
 import AboutInput from "./AboutInput";
+import { useSelector } from "react-redux";
+import { current } from "@reduxjs/toolkit";
 
 const UserProfile = () => {
   const [isSelected, setSelected] = useState("Profile");
   const [edit, setEdit] = useState(null);
+
+  const currentUser = useSelector((state) => state.currentUser)
 
   return (
     <Container fluid>
@@ -126,7 +130,7 @@ const UserProfile = () => {
                 </div>
                 <img
                   id="profile-userImage"
-                  src="https://cdn.landesa.org/wp-content/uploads/default-user-image.png"
+                  src={currentUser.avatar}
                   alt="user"
                   className="image-fluid"
                 />
@@ -135,7 +139,7 @@ const UserProfile = () => {
             <div className="profile-inputBox">
               {edit === null ? (
                 <>
-                  <p className="my-0">User Name Here</p>
+                  <p className="my-0">{currentUser.userName}</p>
                   <div
                     className="profile-svgBox"
                     onClick={() => setEdit("nameChange")}
@@ -156,7 +160,7 @@ const UserProfile = () => {
               <div className="profile-inputBox">
                 {edit !== "aboutChange" && (
                   <>
-                    <p>I'm using WhatsApp...or am I?</p>
+                    <p>{currentUser.about}</p>
                     <div
                       className="profile-svgBox"
                       onClick={() => setEdit("aboutChange")}
@@ -170,7 +174,7 @@ const UserProfile = () => {
             </div>
             <div className="mt-3 d-flex flex-column">
               <div>Phone Number</div>
-              <div>User Phone number will go here</div>
+              <div>{currentUser.phone}</div>
             </div>
           </div>
         </Col>

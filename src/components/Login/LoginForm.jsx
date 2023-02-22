@@ -1,20 +1,40 @@
 import "./loginForm.css";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useState } from "react";
+import { logInAction } from "../redux/actions";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const LoginForm = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [userName, setUserName] = useState("")
+  const [password, setPassword] = useState("")
+
+  const userInfo = {
+    userName: userName,
+    password: password
+  }
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+    dispatch(logInAction(userInfo))
+  }
+
   return (
     <Container className="p-5 mt-5">
       <Row className="d-flex justify-content-center">
         <Col md="7" className="mt-5">
           <h2 className="text-center">Sign In</h2>
-          <Form>
+          <Form onSubmit={(e) => onSubmitHandler(e)}>
             <Form.Group className="mb-3">
-              <Form.Label className="fw-bold">Email</Form.Label>
-              <Form.Control type="email" placeholder="Email" />
+              <Form.Label className="fw-bold">Username</Form.Label>
+              <Form.Control value={userName} onChange={(e) => setUserName(e.target.value)} type="text" placeholder="Username" />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
             </Form.Group>
             <Button className="login-80p mb-4 fw-bold" type="submit">
               SIGN IN
