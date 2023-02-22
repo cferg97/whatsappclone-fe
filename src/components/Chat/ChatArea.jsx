@@ -181,6 +181,7 @@ const ChatArea = (props) => {
           </Container>
         </Container>
       )}
+      
       <NewChatModal
         contacts={testContactsList}
         show={show}
@@ -188,8 +189,6 @@ const ChatArea = (props) => {
         handleClose={handleClose}
       />
       <UserModal show={showUser} handleClose={handleUserClose} />
-
-      
     </>
   );
 };

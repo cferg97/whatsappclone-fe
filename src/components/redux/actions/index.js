@@ -32,6 +32,31 @@ export const fetchCurrentUser = () => {
   };
 };
 
+export const changeProfileAction = (userInfo) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch("http://localhost:3001/users/me", {
+        method: "PUT",
+        body: JSON.stringify(userInfo),
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        }
+      })
+      if(response.ok){
+        dispatch(fetchCurrentUser())
+      }
+      else{
+        console.log('There was an error submitting your profile')
+      }
+    } catch (err) {
+        console.log(err)
+    }
+  };
+};
+
 export const logInAction = (userInfo) => {
   return async () => {
     try {

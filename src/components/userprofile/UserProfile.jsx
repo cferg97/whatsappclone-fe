@@ -7,20 +7,37 @@ import { CiKeyboard } from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { SlPencil } from "react-icons/sl";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import ClickAwayListener from "@mui/base/ClickAwayListener";
 import NameInput from "./NameInput";
 import AboutInput from "./AboutInput";
 import { useSelector } from "react-redux";
-import { current } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { changeProfileAction } from "../redux/actions";
+
 
 const UserProfile = () => {
+  const dispatch = useDispatch()
   const [isSelected, setSelected] = useState("Profile");
   const [edit, setEdit] = useState(null);
 
-  const currentUser = useSelector((state) => state.currentUser)
+  const currentUser = useSelector((state) => state.currentUser);
+
+  const [username, setUsername] = useState(currentUser.userName);
+  const [about, setAbout] = useState(currentUser.about);
+  const [phone, setPhone] = useState(currentUser.phone);
+
+  const detailsToEdit = {
+    userName: username,
+    about: about,
+    phone: phone,
+  };
+
+  const onSubmitHandler = () => {
+    dispatch(changeProfileAction(detailsToEdit))
+  }
 
   return (
     <Container fluid>
@@ -139,7 +156,7 @@ const UserProfile = () => {
             <div className="profile-inputBox">
               {edit === null ? (
                 <>
-                  <p className="my-0">{currentUser.userName}</p>
+                  <p className="my-0">{username}</p>
                   <div
                     className="profile-svgBox"
                     onClick={() => setEdit("nameChange")}
@@ -150,7 +167,7 @@ const UserProfile = () => {
               ) : (
                 <ClickAwayListener onClickAway={() => setEdit(null)}>
                   <>
-                    <NameInput />
+                    <NameInput value={username} setName={setUsername} />
                   </>
                 </ClickAwayListener>
               )}
@@ -160,7 +177,7 @@ const UserProfile = () => {
               <div className="profile-inputBox">
                 {edit !== "aboutChange" && (
                   <>
-                    <p>{currentUser.about}</p>
+                    <p>{about}</p>
                     <div
                       className="profile-svgBox"
                       onClick={() => setEdit("aboutChange")}
@@ -169,14 +186,17 @@ const UserProfile = () => {
                     </div>
                   </>
                 )}
-                {edit === "aboutChange" && <AboutInput />}
+                {edit === "aboutChange" && (
+                  <AboutInput value={about} setAbout={setAbout} />
+                )}
               </div>
             </div>
             <div className="mt-3 d-flex flex-column">
               <div>Phone Number</div>
-              <div>{currentUser.phone}</div>
+              <div>{phone}</div>
             </div>
           </div>
+          <Button className="mt-3" onClick={() => onSubmitHandler()}>Submit Changes</Button>
         </Col>
       </Row>
     </Container>
