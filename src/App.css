@@ -153,7 +153,7 @@ body {
 }
 
 .profile-inputBox p {
-  width: 30%;
+  /* width: 30%; */
 }
 
 .profile-svgBox {
@@ -171,7 +171,7 @@ body {
 input {
   border: none;
   padding: 0.5em 0 0.5em 0;
-  width: 40%;
+  width: 1000%;
 }
 
 input:focus {
@@ -187,6 +187,13 @@ input:focus {
   transition: all 0.3s ease-in-out;
 }
 
-.user-profile-pic:hover {}
+.user-profile-pic:hover {
+  filter: drop-shadow(1px 1px 5px lightgreen);
+}
+
+.grey-chat-box{
+  background-color: rgb(189, 189, 189);
+}
+
 
 .user-modal {}

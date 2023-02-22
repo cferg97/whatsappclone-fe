@@ -35,6 +35,29 @@ const ChatArea = (props) => {
     },
   ];
 
+  const testMessages = [
+    {
+      text: "Hello! How are you?",
+      userName: "jackie"
+    },
+    {
+      text: "Hi! I'm fine thanks. You?",
+      userName: 'cferg97'
+    },
+    {
+      text: "Oh, I'm not too bad. I've got a lot going on at the minute but nothing I can't deal with.",
+      userName: 'jackie'
+    },
+    {
+      text: "Life treating you ok?",
+      userName: 'jackie'
+    },
+    {
+      text: "Yeah, things are going alright!",
+      userName: 'cferg97'
+    }
+  ]
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -172,8 +195,9 @@ const ChatArea = (props) => {
             >
               <Row style={{ height: "90%", width: "100%" }}>
                 <Col md={12} style={{ height: "90%" }}>
-                  <ChatBubble text="Hello!" />
-                  <ChatBubble text="Hello!" />
+                  {testMessages.map((message) => (
+                    <ChatBubble text={message.text} user={message.userName}/>
+                  ))}
                 </Col>
               </Row>
             </Container>

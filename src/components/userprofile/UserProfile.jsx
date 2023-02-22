@@ -152,7 +152,7 @@ const UserProfile = () => {
             </div>
           </div>
         </Col>
-        <Col lg={8}>
+        <Col md={8} lg={8}>
           <div id="profile-rightBox d-flex flex-column">
             <div id="profile-userImagePanel">
               <div id="profile-userImageBox">

@@ -8,12 +8,12 @@ const UserModal = (props) => {
         show={props.show}
         onHide={props.handleClose}
         size="lg"
-        style={{ height: "50rem" }}
+        style={{ height: "50rem", overflow: 'hidden' }}
         backdrop="static"
         keyboard={false}
       >
         <Modal.Header closeButton>Profile</Modal.Header>
-        <Modal.Body className="m-0 p-0" style={{ height: "50rem" }}>
+        <Modal.Body className="m-0 p-0" style={{ height: "fit-content" }}>
           <Container
             fluid
             style={{
