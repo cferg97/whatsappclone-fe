@@ -4,7 +4,7 @@ export const SAVE_USER_TOKEN = "SAVE_USER_TOKEN";
 export const SAVE_CURRENT_USER = "SAVE_CURRENT_USER";
 export const SAVE_ALL_CONVERSATIONS = "SAVE_ALL_CONVERSATIONS";
 export const SAVE_SEARCH = "SAVE_SEARCH";
-export const SAVE_CONTACTS = "SAVE_CONTACTS"
+export const SAVE_CONTACTS = "SAVE_CONTACTS";
 //the above are exporting action names, so you do not have to type out the quotes ""
 //each time you want to use one
 
@@ -71,7 +71,9 @@ export const logInAction = (userInfo) => {
       if (response.ok) {
         let fetchedData = await response.json();
         let accessToken = fetchedData.accessToken;
+        let username = fetchedData.userName;
         localStorage.setItem("UserAccessToken", accessToken);
+        localStorage.setItem("Username", username);
         window.location.assign("http://localhost:3000/dashboard");
       } else {
         console.log("There was a problem logging into your account");
@@ -161,17 +163,41 @@ export const saveContactsAction = (contacts) => {
         body: JSON.stringify(contacts),
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type":"application/json"
+          "Content-Type": "application/json",
         },
-      })
-      if(response.ok){
-        console.log("Contacts saved")
-      }
-      else{
-        console.log("Couldn't save contacts - check BE")
+      });
+      if (response.ok) {
+        console.log("Contacts saved");
+      } else {
+        console.log("Couldn't save contacts - check BE");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-}   
+  };
+};
+
+export const getUserConversations = () => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch("http://localhost:3001/chats", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SAVE_ALL_CONVERSATIONS,
+          payload: fetchedData,
+        });
+      } else {
+        console.log("Couldn't fetch conversations");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

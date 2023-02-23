@@ -8,20 +8,46 @@ import TextArea from "./TextArea";
 import ChatBubble from "./ChatBubbleOwn";
 import UserModal from "../userprofile/UserModal";
 import { useDispatch } from "react-redux";
-import { fetchCurrentUser } from "../redux/actions";
+import { fetchCurrentUser, getUserConversations } from "../redux/actions";
 import { useSelector } from "react-redux";
-import {AiOutlineUserAdd} from 'react-icons/ai'
+import { AiOutlineUserAdd } from "react-icons/ai";
 import ContactsModel from "./ContactsModel";
+import { io } from "socket.io-client";
 
 const ChatArea = (props) => {
+  const socket = io("http://localhost:3001", { transports: ["websocket"] });
   const currentUser = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
-  const [showContacts, setShowContacts] = useState(false)
+  const [showContacts, setShowContacts] = useState(false);
   const [selectedChat, setSelectedChat] = useState("");
 
-  console.log(selectedChat);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+    dispatch(getUserConversations())
+  }, []);
+
+  useEffect(() => {
+    socket.on("welcome", (welcomeMessage) => {
+      console.log(welcomeMessage);
+    });
+  }, []);
+
+  useEffect(() => {
+    const username = localStorage.getItem("Username")
+    socket.emit("setUsername", { username: username });
+
+    socket.on("loggedIn", (onlineUsersList) => {
+      setUsers(onlineUsersList);
+    });
+  }, []);
+
+  console.log(users);
 
   // const testContactsList = [
   //   {
@@ -67,14 +93,8 @@ const ChatArea = (props) => {
   const handleUserClose = () => setShowUser(false);
   const handleUserOpen = () => setShowUser(true);
 
-  const handleContactsClose = () => setShowContacts(false)
-  const handleContactsOpen = () => setShowContacts(true)
-
-
-
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, []);
+  const handleContactsClose = () => setShowContacts(false);
+  const handleContactsOpen = () => setShowContacts(true);
 
   return (
     <>
@@ -103,7 +123,13 @@ const ChatArea = (props) => {
           >
             <Container fluid>
               <Row className="text-center mt-2 p-0 m-0">
-                <Container style={{ display: "flex", justifyItems: 'space-between', marginBottom: "1rem" }}>
+                <Container
+                  style={{
+                    display: "flex",
+                    justifyItems: "space-between",
+                    marginBottom: "1rem",
+                  }}
+                >
                   <img
                     className="img-fluid user-profile-pic"
                     onClick={() => setShowUser(true)}
@@ -119,7 +145,17 @@ const ChatArea = (props) => {
                   />
                   <h3 className="mx-auto my-auto">Chats</h3>
 
-                  <button onClick={() => handleContactsOpen()} className="contacts-btn" style={{background: "transparent", border: 'none', fontSize: '2rem'}}><AiOutlineUserAdd/></button>
+                  <button
+                    onClick={() => handleContactsOpen()}
+                    className="contacts-btn"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      fontSize: "2rem",
+                    }}
+                  >
+                    <AiOutlineUserAdd />
+                  </button>
                 </Container>
               </Row>
               <Row>
@@ -142,6 +178,7 @@ const ChatArea = (props) => {
                   flexDirection: "column",
                   margin: "0 auto",
                   maxHeight: "70%",
+                  alignItems: 'center'
                 }}
               >
                 {/* {testContactsList.map((contact) => (
@@ -152,6 +189,7 @@ const ChatArea = (props) => {
                     }}
                   />
                 ))} */}
+                
               </Container>
               <Container
                 className="m-0 p-0"
@@ -215,7 +253,7 @@ const ChatArea = (props) => {
           </Container>
         </Container>
       )}
-      
+
       <NewChatModal
         // contacts={testContactsList}
         show={show}
@@ -223,7 +261,7 @@ const ChatArea = (props) => {
         handleClose={handleClose}
       />
       <UserModal show={showUser} handleClose={handleUserClose} />
-      <ContactsModel show={showContacts} handleClose={handleContactsClose}/>
+      <ContactsModel show={showContacts} handleClose={handleContactsClose} />
     </>
   );
 };

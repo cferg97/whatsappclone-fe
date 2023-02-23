@@ -208,3 +208,21 @@ input:focus {
   transform: scale(1.1);
 
 }
+
+.existing-contacts-btn{
+  background: rgb(168, 168, 168);
+  border: none;
+  width: fit-content;
+  padding: 0.3rem;
+  border-radius: 10px;
+}
+
+.contacts-search{
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.search-results{
+  border: 1px solid grey;
+}

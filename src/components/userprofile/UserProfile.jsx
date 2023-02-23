@@ -44,12 +44,13 @@ const UserProfile = () => {
   const onImageUpload = () => {
     const formData = new FormData();
     formData.append("avatar", image);
-    setImage(null)
+    setImage(null);
     dispatch(uploadAvatarAction(formData));
   };
 
   const onLogOut = () => {
     localStorage.removeItem("UserAccessToken");
+    localStorage.removeItem("Username");
     navigate("/");
   };
 
@@ -195,7 +196,7 @@ const UserProfile = () => {
               )}
             </div>
             <div className="mt-3 d-flex flex-column">
-              <label for="about">About</label>
+              <label>About</label>
               <div className="profile-inputBox">
                 {edit !== "aboutChange" && (
                   <>
