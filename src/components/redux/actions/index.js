@@ -4,6 +4,7 @@ export const SAVE_USER_TOKEN = "SAVE_USER_TOKEN";
 export const SAVE_CURRENT_USER = "SAVE_CURRENT_USER";
 export const SAVE_ALL_CONVERSATIONS = "SAVE_ALL_CONVERSATIONS";
 export const SAVE_SEARCH = "SAVE_SEARCH";
+export const SAVE_CONTACTS = "SAVE_CONTACTS"
 //the above are exporting action names, so you do not have to type out the quotes ""
 //each time you want to use one
 
@@ -149,3 +150,28 @@ export const getAllUsersAction = () => {
     }
   };
 };
+
+export const saveContactsAction = (contacts) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch("http://localhost:3001/users/contacts", {
+        method: "POST",
+        body: JSON.stringify(contacts),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type":"application/json"
+        },
+      })
+      if(response.ok){
+        console.log("Contacts saved")
+      }
+      else{
+        console.log("Couldn't save contacts - check BE")
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}   

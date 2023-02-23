@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "../redux/actions";
 import { useSelector } from "react-redux";
 import {AiOutlineUserAdd} from 'react-icons/ai'
+import ContactsModel from "./ContactsModel";
 
 const ChatArea = (props) => {
   const currentUser = useSelector((state) => state.currentUser);
@@ -64,6 +65,8 @@ const ChatArea = (props) => {
 
   const handleUserClose = () => setShowUser(false);
   const handleUserOpen = () => setShowUser(true);
+
+
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -216,6 +219,7 @@ const ChatArea = (props) => {
         handleClose={handleClose}
       />
       <UserModal show={showUser} handleClose={handleUserClose} />
+      <ContactsModel/>
     </>
   );
 };

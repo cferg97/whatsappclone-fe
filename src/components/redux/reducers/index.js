@@ -1,4 +1,4 @@
-import { SAVE_CURRENT_USER, SAVE_ALL_CONVERSATIONS, SAVE_SEARCH } from "../actions";
+import { SAVE_CURRENT_USER, SAVE_ALL_CONVERSATIONS, SAVE_SEARCH, SAVE_CONTACTS } from "../actions";
 //importing the action names from the actions file
 
 const initialState = {
