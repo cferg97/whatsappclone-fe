@@ -10,6 +10,7 @@ import UserModal from "../userprofile/UserModal";
 import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "../redux/actions";
 import { useSelector } from "react-redux";
+import {AiOutlineUserAdd} from 'react-icons/ai'
 
 const ChatArea = (props) => {
   const currentUser = useSelector((state) => state.currentUser);
@@ -20,43 +21,43 @@ const ChatArea = (props) => {
 
   console.log(selectedChat);
 
-  const testContactsList = [
-    {
-      name: "jackie",
-      id: 26,
-    },
-    {
-      name: "Bob",
-      id: 20,
-    },
-    {
-      name: "david",
-      id: 2,
-    },
-  ];
+  // const testContactsList = [
+  //   {
+  //     name: "jackie",
+  //     id: 26,
+  //   },
+  //   {
+  //     name: "Bob",
+  //     id: 20,
+  //   },
+  //   {
+  //     name: "david",
+  //     id: 2,
+  //   },
+  // ];
 
-  const testMessages = [
-    {
-      text: "Hello! How are you?",
-      userName: "jackie"
-    },
-    {
-      text: "Hi! I'm fine thanks. You?",
-      userName: 'cferg97'
-    },
-    {
-      text: "Oh, I'm not too bad. I've got a lot going on at the minute but nothing I can't deal with.",
-      userName: 'jackie'
-    },
-    {
-      text: "Life treating you ok?",
-      userName: 'jackie'
-    },
-    {
-      text: "Yeah, things are going alright!",
-      userName: 'cferg97'
-    }
-  ]
+  // const testMessages = [
+  //   {
+  //     text: "Hello! How are you?",
+  //     userName: "jackie"
+  //   },
+  //   {
+  //     text: "Hi! I'm fine thanks. You?",
+  //     userName: 'cferg97'
+  //   },
+  //   {
+  //     text: "Oh, I'm not too bad. I've got a lot going on at the minute but nothing I can't deal with.",
+  //     userName: 'jackie'
+  //   },
+  //   {
+  //     text: "Life treating you ok?",
+  //     userName: 'jackie'
+  //   },
+  //   {
+  //     text: "Yeah, things are going alright!",
+  //     userName: 'cferg97'
+  //   }
+  // ]
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -95,7 +96,7 @@ const ChatArea = (props) => {
           >
             <Container fluid>
               <Row className="text-center mt-2 p-0 m-0">
-                <Container style={{ display: "flex", marginBottom: "1rem" }}>
+                <Container style={{ display: "flex", justifyItems: 'space-between', marginBottom: "1rem" }}>
                   <img
                     className="img-fluid user-profile-pic"
                     onClick={() => setShowUser(true)}
@@ -109,7 +110,9 @@ const ChatArea = (props) => {
                     src={currentUser.avatar}
                     alt=""
                   />
-                  <h3 className="mx-auto mt-1">Chats</h3>
+                  <h3 className="mx-auto my-auto">Chats</h3>
+
+                  <button className="contacts-btn" style={{background: "transparent", border: 'none', fontSize: '2rem'}}><AiOutlineUserAdd/></button>
                 </Container>
               </Row>
               <Row>
@@ -134,14 +137,14 @@ const ChatArea = (props) => {
                   maxHeight: "70%",
                 }}
               >
-                {testContactsList.map((contact) => (
+                {/* {testContactsList.map((contact) => (
                   <Contacts
                     user={contact}
                     onClick={() => {
                       setSelectedChat(contact.name);
                     }}
                   />
-                ))}
+                ))} */}
               </Container>
               <Container
                 className="m-0 p-0"
@@ -195,9 +198,9 @@ const ChatArea = (props) => {
             >
               <Row style={{ height: "90%", width: "100%" }}>
                 <Col md={12} style={{ height: "90%" }}>
-                  {testMessages.map((message) => (
+                  {/* {testMessages.map((message) => (
                     <ChatBubble text={message.text} user={message.userName}/>
-                  ))}
+                  ))} */}
                 </Col>
               </Row>
             </Container>
@@ -207,7 +210,7 @@ const ChatArea = (props) => {
       )}
       
       <NewChatModal
-        contacts={testContactsList}
+        // contacts={testContactsList}
         show={show}
         onHide={handleClose}
         handleClose={handleClose}
