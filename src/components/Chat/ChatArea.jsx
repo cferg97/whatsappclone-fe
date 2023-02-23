@@ -18,6 +18,7 @@ const ChatArea = (props) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
+  const [showContacts, setShowContacts] = useState(false)
   const [selectedChat, setSelectedChat] = useState("");
 
   console.log(selectedChat);
@@ -65,6 +66,9 @@ const ChatArea = (props) => {
 
   const handleUserClose = () => setShowUser(false);
   const handleUserOpen = () => setShowUser(true);
+
+  const handleContactsClose = () => setShowContacts(false)
+  const handleContactsOpen = () => setShowContacts(true)
 
 
 
@@ -115,7 +119,7 @@ const ChatArea = (props) => {
                   />
                   <h3 className="mx-auto my-auto">Chats</h3>
 
-                  <button className="contacts-btn" style={{background: "transparent", border: 'none', fontSize: '2rem'}}><AiOutlineUserAdd/></button>
+                  <button onClick={() => handleContactsOpen()} className="contacts-btn" style={{background: "transparent", border: 'none', fontSize: '2rem'}}><AiOutlineUserAdd/></button>
                 </Container>
               </Row>
               <Row>
@@ -219,7 +223,7 @@ const ChatArea = (props) => {
         handleClose={handleClose}
       />
       <UserModal show={showUser} handleClose={handleUserClose} />
-      <ContactsModel/>
+      <ContactsModel show={showContacts} handleClose={handleContactsClose}/>
     </>
   );
 };
