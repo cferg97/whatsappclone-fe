@@ -1,8 +1,10 @@
 import { Modal, Button, Container } from "react-bootstrap";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const NewChatModal = (props) => {
   const [chat, setChat] = useState([]);
+  const currentUser = useSelector((state) => state.currentUser)
 
   console.log(chat);
 
@@ -26,7 +28,7 @@ const NewChatModal = (props) => {
         <Modal.Body>
           <Container fluid>
             {" "}
-            {/* {props.contacts.map((contact, index) => (
+            {currentUser.contacts.map((contact, index) => (
               <>
                 <li key={index} style={{ listStyle: "none" }}>
                   <span style={{ marginRight: 4 }}>
@@ -35,10 +37,10 @@ const NewChatModal = (props) => {
                       onChange={() => changeChatState(contact.id)}
                     />
                   </span>
-                  {contact.name}
+                  {contact.userName}
                 </li>
               </>
-            ))} */}
+            ))}
           </Container>
         </Modal.Body>
         <Modal.Footer>
