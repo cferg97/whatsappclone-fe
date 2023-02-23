@@ -1,10 +1,10 @@
-import { Modal, Button, Container } from "react-bootstrap";
+import { Modal, Button, Container, Form } from "react-bootstrap";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const NewChatModal = (props) => {
   const [chat, setChat] = useState([]);
-  const currentUser = useSelector((state) => state.currentUser)
+  const currentUser = useSelector((state) => state.currentUser);
 
   console.log(chat);
 
@@ -27,20 +27,20 @@ const NewChatModal = (props) => {
         </Modal.Header>
         <Modal.Body>
           <Container fluid>
-            {" "}
-            {currentUser.contacts.map((contact, index) => (
-              <>
-                <li key={index} style={{ listStyle: "none" }}>
-                  <span style={{ marginRight: 4 }}>
-                    <input
-                      type="checkbox"
-                      onChange={() => changeChatState(contact.id)}
-                    />
-                  </span>
-                  {contact.userName}
-                </li>
-              </>
-            ))}
+            <h5>Select a user to chat with!</h5>
+            <Form.Group>
+              <Form.Control as="select">
+                {currentUser && (
+                  <>
+                    {currentUser.contacts?.map((i) => (
+                      <option>
+                        {i.userName} | {i.email}
+                      </option>
+                    ))}
+                  </>
+                )}
+              </Form.Control>
+            </Form.Group>
           </Container>
         </Modal.Body>
         <Modal.Footer>

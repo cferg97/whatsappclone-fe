@@ -59,7 +59,7 @@ export const changeProfileAction = (userInfo) => {
 };
 
 export const logInAction = (userInfo) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       let response = await fetch("http://localhost:3001/users/session", {
         method: "POST",
@@ -75,6 +75,7 @@ export const logInAction = (userInfo) => {
         localStorage.setItem("UserAccessToken", accessToken);
         localStorage.setItem("Username", username);
         window.location.assign("http://localhost:3000/dashboard");
+        dispatch(fetchCurrentUser());
       } else {
         console.log("There was a problem logging into your account");
       }
@@ -168,6 +169,7 @@ export const saveContactsAction = (contacts) => {
       });
       if (response.ok) {
         console.log("Contacts saved");
+        dispatch(fetchCurrentUser());
       } else {
         console.log("Couldn't save contacts - check BE");
       }
@@ -199,5 +201,15 @@ export const getUserConversations = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+export const getCurrentConversation = () => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch("")
+    } catch (err) {}
   };
 };

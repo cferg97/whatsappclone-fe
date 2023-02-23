@@ -8,8 +8,9 @@ import { useState } from "react";
 const ContactsModel = (props) => {
   const dispatch = useDispatch();
 
-  const currentUser = useSelector((state) => state.currentUser);
-  const users = useSelector((state) => state.userSearchResults);
+  useEffect(() => {
+    dispatch(getAllUsersAction());
+  }, []);
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -20,15 +21,11 @@ const ContactsModel = (props) => {
   };
 
   const onSubmit = () => {
-    dispatch(saveContactsAction(contactsToSend))
-    props.handleClose()
-    setQuery("")
-    setUserToAdd("")
-  }
-
-  useEffect(() => {
-    dispatch(getAllUsersAction());
-  }, []);
+    dispatch(saveContactsAction(contactsToSend));
+    props.handleClose();
+    setQuery("");
+    setUserToAdd("");
+  };
 
   const searchFunction = async () => {
     if (query !== "") {
@@ -85,7 +82,7 @@ const ContactsModel = (props) => {
             {results && (
               <Form.Group controlId="exampleForm.ControlSelect2">
                 <Form.Control as="select">
-                  {results.map((i) => (
+                  {results?.map((i) => (
                     <option onClick={() => setUserToAdd(i._id)}>
                       {i.userName} | {i.email}
                     </option>
@@ -108,7 +105,9 @@ const ContactsModel = (props) => {
           <Button variant="secondary" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => onSubmit()}>Add To Contacts</Button>
+          <Button variant="primary" onClick={() => onSubmit()}>
+            Add To Contacts
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

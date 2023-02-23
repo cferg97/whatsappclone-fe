@@ -17,6 +17,7 @@ import { io } from "socket.io-client";
 const ChatArea = (props) => {
   const socket = io("http://localhost:3001", { transports: ["websocket"] });
   const currentUser = useSelector((state) => state.currentUser);
+  const allConversations = useSelector((state) => state.allConversations)
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
@@ -26,6 +27,8 @@ const ChatArea = (props) => {
   const [chatHistory, setChatHistory] = useState([]);
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
+
+  console.log(selectedChat)
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -140,7 +143,7 @@ const ChatArea = (props) => {
                       position: "absolute",
                       left: 20,
                     }}
-                    src={currentUser.avatar}
+                    src={currentUser?.avatar}
                     alt=""
                   />
                   <h3 className="mx-auto my-auto">Chats</h3>
@@ -189,6 +192,9 @@ const ChatArea = (props) => {
                     }}
                   />
                 ))} */}
+                {currentUser && allConversations?.map((i) => (
+                  <Contacts user={i.members} onClick={() => setSelectedChat(i._id.toString())} />
+                ))}
                 
               </Container>
               <Container
