@@ -226,3 +226,11 @@ input:focus {
 .search-results{
   border: 1px solid grey;
 }
+
+.delete-chat-btn{
+  transition: all 0.3s ease-in-out;
+}
+
+.delete-chat-btn:hover{
+  color: red;
+}

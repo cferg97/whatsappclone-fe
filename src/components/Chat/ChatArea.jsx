@@ -24,6 +24,7 @@ const ChatArea = (props) => {
   const [showContacts, setShowContacts] = useState(false);
   const [selectedChat, setSelectedChat] = useState("");
 
+  console.log(selectedChat)
   const [chatHistory, setChatHistory] = useState([]);
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
@@ -193,7 +194,7 @@ const ChatArea = (props) => {
                   />
                 ))} */}
                 {currentUser && allConversations?.map((i) => (
-                  <Contacts user={i.members} onClick={() => setSelectedChat(i._id.toString())} />
+                  <Contacts avatar={i.avatar} id={i._id} user={i.members} name={i.name ? i.name : "no name"} onClick={() => setSelectedChat(i._id)} />
                 ))}
                 
               </Container>

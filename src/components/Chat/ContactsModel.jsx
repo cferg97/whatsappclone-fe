@@ -25,6 +25,7 @@ const ContactsModel = (props) => {
     props.handleClose();
     setQuery("");
     setUserToAdd("");
+    setResults("")
   };
 
   const searchFunction = async () => {

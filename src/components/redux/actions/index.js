@@ -193,7 +193,7 @@ export const getUserConversations = () => {
         let fetchedData = await response.json();
         dispatch({
           type: SAVE_ALL_CONVERSATIONS,
-          payload: fetchedData,
+          payload: fetchedData.reverse(),
         });
       } else {
         console.log("Couldn't fetch conversations");
@@ -209,7 +209,68 @@ export const getCurrentConversation = () => {
     try {
       const accessToken = localStorage.getItem("UserAccessToken");
       const token = accessToken.split('"').join("");
-      let response = await fetch("")
+      let response = await fetch("");
     } catch (err) {}
+  };
+};
+
+export const newChatAction = (info) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch("http://localhost:3001/chats", {
+        method: "POST",
+        body: JSON.stringify(info),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        console.log("Created chat successfully");
+        dispatch(getUserConversations());
+      } else {
+        console.log("There was a problem submitting chat");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchSelectedChat = (id) => {
+  return async (dispatch) => {
+    try{
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+}
+
+export const deleteChatAction = (id) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("UserAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`http://localhost:3001/chats/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if(response.ok){
+        dispatch(getUserConversations())
+        console.log("Chat successfully deleted")
+      }
+      else{
+        console.log("Couldn't delete conversation")
+      }
+    } catch (err) {
+      console.log(err)
+    }
   };
 };
