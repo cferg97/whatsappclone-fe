@@ -10,7 +10,7 @@ const NewChatModal = (props) => {
   const [chatName, setChatName] = useState("");
   const [userToChat, setUserToChat] = useState("");
   const currentUser = useSelector((state) => state.currentUser);
-  console.log(userToChat);
+  const currentChat = useSelector((state) => state.currentConversation);
 
   const chatToSend = {
     members: [userToChat, currentUser._id],
@@ -44,8 +44,14 @@ const NewChatModal = (props) => {
               <Form.Control as="select">
                 {currentUser && (
                   <>
-                    {currentUser.contacts?.map((i) => (
-                      <option onClick={() => setUserToChat(i._id)}>
+                    {currentUser.contacts?.map((i, index) => (
+                      <option
+                        key={index + 5}
+                        onClick={() => {
+                          setUserToChat(i._id);
+                           props.joinRoom()
+                        }}
+                      >
                         {i.userName} | {i.email}
                       </option>
                     ))}
@@ -69,7 +75,9 @@ const NewChatModal = (props) => {
           <Button variant="secondary" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => onSubmit()}>Create Chat</Button>
+          <Button variant="primary" onClick={() => onSubmit()}>
+            Create Chat
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

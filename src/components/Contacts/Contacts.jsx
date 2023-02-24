@@ -2,17 +2,19 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { deleteChatAction } from "../redux/actions";
+import { fetchSelectedChat } from "../redux/actions";
 
 const Contacts = (props) => {
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   const onDelete = (id) => {
-    dispatch(deleteChatAction(id))
-  }
+    dispatch(deleteChatAction(id));
+  };
 
   return (
     <>
       <Card
+        onClick={() => dispatch(fetchSelectedChat(props.id))}
         className="p-0 m-0 chat-area-card"
         style={{
           display: "flex",
@@ -32,7 +34,7 @@ const Contacts = (props) => {
         >
           <img
             className="img-fluid"
-            style={{ borderRadius: "100%", height: '50px' }}
+            style={{ borderRadius: "100%", height: "50px" }}
             alt=""
             src={props.avatar ? props.avatar : "http://picsum.photos/100/100"}
           />
@@ -44,9 +46,9 @@ const Contacts = (props) => {
               style={{ width: "100%", height: "100%", alignContent: "center" }}
               className="m-0 p-0"
             >
-              <p style={{lineHeight: '0.9rem', marginTop: '10px'}}>
+              <p style={{ lineHeight: "0.9rem", marginTop: "10px" }}>
                 {props.user.length} members <br />
-                <span style={{fontSize: '0.8rem'}}>{props.name}</span>
+                <span style={{ fontSize: "0.8rem" }}>{props.name}</span>
               </p>
             </Row>
             {/* <h6 className="text-muted">[last message sent]</h6> */}
@@ -58,7 +60,10 @@ const Contacts = (props) => {
               color: "lightgrey",
             }}
           >
-            <BsFillTrashFill onClick={() => onDelete(props.id)} className="delete-chat-btn"/>
+            <BsFillTrashFill
+              onClick={() => onDelete(props.id)}
+              className="delete-chat-btn"
+            />
           </Container>
         </Card.Body>
       </Card>

@@ -17,23 +17,24 @@ import { io } from "socket.io-client";
 const ChatArea = (props) => {
   const socket = io("http://localhost:3001", { transports: ["websocket"] });
   const currentUser = useSelector((state) => state.currentUser);
-  const allConversations = useSelector((state) => state.allConversations)
+  const currentChat = useSelector((state) => state.currentConversation);
+  const allConversations = useSelector((state) => state.allConversations);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
   const [showContacts, setShowContacts] = useState(false);
-  const [selectedChat, setSelectedChat] = useState("");
 
-  console.log(selectedChat)
   const [chatHistory, setChatHistory] = useState([]);
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
 
-  console.log(selectedChat)
+  const joinRoomEvent = () => {
+    socket.emit("joinRoom", { room: currentChat?.room });
+  };
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
-    dispatch(getUserConversations())
+    dispatch(getUserConversations());
   }, []);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const ChatArea = (props) => {
   }, []);
 
   useEffect(() => {
-    const username = localStorage.getItem("Username")
+    const username = localStorage.getItem("Username");
     socket.emit("setUsername", { username: username });
 
     socket.on("loggedIn", (onlineUsersList) => {
@@ -182,7 +183,7 @@ const ChatArea = (props) => {
                   flexDirection: "column",
                   margin: "0 auto",
                   maxHeight: "70%",
-                  alignItems: 'center'
+                  alignItems: "center",
                 }}
               >
                 {/* {testContactsList.map((contact) => (
@@ -193,10 +194,17 @@ const ChatArea = (props) => {
                     }}
                   />
                 ))} */}
-                {currentUser && allConversations?.map((i) => (
-                  <Contacts avatar={i.avatar} id={i._id} user={i.members} name={i.name ? i.name : "no name"} onClick={() => setSelectedChat(i._id)} />
-                ))}
-                
+                {currentUser &&
+                  allConversations?.map((i, index) => (
+                    <Contacts
+                      key={index + 2}
+                      avatar={i.avatar}
+                      id={i._id}
+                      user={i.members}
+                      name={i.name ? i.name : "no name"}
+                      joinRoom={joinRoomEvent(i.room)}
+                    />
+                  ))}
               </Container>
               <Container
                 className="m-0 p-0"
@@ -239,10 +247,7 @@ const ChatArea = (props) => {
             style={{ position: "absolute", right: 0, width: "75%" }}
             className="chat-area-main-con p-0 m-0"
           >
-            <ChatHeader
-              selectedChat={selectedChat}
-              user={props.selectedChat ? props.selectedChat : ""}
-            />
+            <ChatHeader />
             <Container
               style={{ width: "100%", height: "90%" }}
               fluid
@@ -253,6 +258,15 @@ const ChatArea = (props) => {
                   {/* {testMessages.map((message) => (
                     <ChatBubble text={message.text} user={message.userName}/>
                   ))} */}
+                  {currentChat &&
+                    currentChat?.messages?.map((message, index) => (
+                      <ChatBubble
+                        key={index + 3}
+                        sentAt={message?.createdAt}
+                        text={message?.content}
+                        user={message?.sender}
+                      />
+                    ))}
                 </Col>
               </Row>
             </Container>

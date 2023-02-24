@@ -3,6 +3,7 @@ export const FETCH_PROFILE_OTHER = "FETCH_PROFILE_OTHER";
 export const SAVE_USER_TOKEN = "SAVE_USER_TOKEN";
 export const SAVE_CURRENT_USER = "SAVE_CURRENT_USER";
 export const SAVE_ALL_CONVERSATIONS = "SAVE_ALL_CONVERSATIONS";
+export const SAVE_CURRENT_CONVERSATION = "SAVE_CURRENT_CONVERSATION"
 export const SAVE_SEARCH = "SAVE_SEARCH";
 export const SAVE_CONTACTS = "SAVE_CONTACTS";
 //the above are exporting action names, so you do not have to type out the quotes ""
@@ -241,15 +242,31 @@ export const newChatAction = (info) => {
 
 export const fetchSelectedChat = (id) => {
   return async (dispatch) => {
-    try{
+    try {
       const accessToken = localStorage.getItem("UserAccessToken");
       const token = accessToken.split('"').join("");
+      let response = await fetch(`http://localhost:3001/chats/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if(response.ok){
+        console.log("Chat fetched")
+        let fetchedData = await response.json()
+        dispatch({
+          type: SAVE_CURRENT_CONVERSATION,
+          payload: fetchedData
+        })
+      }
+      else{
+        console.log("There was a problem fetching this chat")
+      }
+    } catch (err) {
+      console.log(err);
     }
-    catch(err){
-      console.log(err)
-    }
-  }
-}
+  };
+};
 
 export const deleteChatAction = (id) => {
   return async (dispatch) => {
@@ -262,15 +279,14 @@ export const deleteChatAction = (id) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      if(response.ok){
-        dispatch(getUserConversations())
-        console.log("Chat successfully deleted")
-      }
-      else{
-        console.log("Couldn't delete conversation")
+      if (response.ok) {
+        dispatch(getUserConversations());
+        console.log("Chat successfully deleted");
+      } else {
+        console.log("Couldn't delete conversation");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 };

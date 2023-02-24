@@ -1,4 +1,4 @@
-import { SAVE_CURRENT_USER, SAVE_ALL_CONVERSATIONS, SAVE_SEARCH, SAVE_CONTACTS } from "../actions";
+import { SAVE_CURRENT_USER, SAVE_ALL_CONVERSATIONS, SAVE_SEARCH, SAVE_CONTACTS, SAVE_CURRENT_CONVERSATION } from "../actions";
 //importing the action names from the actions file
 
 const initialState = {
@@ -25,6 +25,13 @@ const mainReducer = (state = initialState, action) => {
         ...state,
         allConversations: action.payload,
       };
+    }
+
+    case SAVE_CURRENT_CONVERSATION: {
+      return {
+        ...state,
+        currentConversation: action.payload
+      }
     }
 
     case SAVE_SEARCH: {
