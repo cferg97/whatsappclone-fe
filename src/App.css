@@ -20,7 +20,6 @@ body {
   height: 4rem;
   width: 100%;
   display: flex;
-
 }
 
 .chat-area-profile-picture {
@@ -77,11 +76,13 @@ body {
   max-height: 90%;
   overflow-y: scroll;
 }
-
+.modal-content {
+  height: 720px;
+}
 #profile-leftSideBar {
   background-color: rgb(240, 239, 239);
   padding: 1em;
-  height: 45rem;
+  height: 660px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -185,18 +186,18 @@ input:focus {
 .user-profile-pic {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  left: 8px;
 }
 
 .user-profile-pic:hover {
   filter: drop-shadow(1px 1px 5px lightgreen);
 }
 
-.grey-chat-box{
+.grey-chat-box {
   background-color: rgb(189, 189, 189);
 }
 
-
-.contacts-btn{
+.contacts-btn {
   height: fit-content;
   width: fit-content;
   padding: 0;
@@ -204,12 +205,11 @@ input:focus {
   transition: 0.3s all ease;
 }
 
-.contacts-btn:hover{
+.contacts-btn:hover {
   transform: scale(1.1);
-
 }
 
-.existing-contacts-btn{
+.existing-contacts-btn {
   background: rgb(168, 168, 168);
   border: none;
   width: fit-content;
@@ -217,20 +217,20 @@ input:focus {
   border-radius: 10px;
 }
 
-.contacts-search{
+.contacts-search {
   width: 100%;
   border: 1px solid grey;
   border-radius: 5px;
 }
 
-.search-results{
+.search-results {
   border: 1px solid grey;
 }
 
-.delete-chat-btn{
+.delete-chat-btn {
   transition: all 0.3s ease-in-out;
 }
 
-.delete-chat-btn:hover{
+.delete-chat-btn:hover {
   color: red;
 }
